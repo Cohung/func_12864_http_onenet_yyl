@@ -109,7 +109,7 @@ void DelayMs(unsigned int j);
 void Delay_50us(unsigned char j);                                  
 
 
-//void BEEP(unsigned int i);
+void BEEP(unsigned int i);
 void Write_E(uchar n,uint x,uchar dat);
 //uchar runnian(uchar y);
 void Write_EE_rec(uchar y,uchar m,uchar d);

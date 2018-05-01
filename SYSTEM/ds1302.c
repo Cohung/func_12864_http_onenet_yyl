@@ -295,37 +295,37 @@ void Display_Menu(unsigned char *ti)
 				
 		}
 		/////////////////////以下为控制12864背光开闭设置
-		if(power_start>power_end){
-	   		if(led_now>=power_start||led_now<=power_end)
-				{
-				lcdak = 1;
-				//cs_573 = 1;Delay_50us(1);cs_573=0;
-				}
-			else
-				{
-				lcdak = 0;
-				//cs_573 = 1;Delay_50us(1);cs_573=0;
-				}
-				}
-		else if(power_start==power_end)
-			{
-			lcdak = 0;
-			//cs_573 = 1;Delay_50us(1);cs_573=0;
-			}
-		else
-		{
-			  if(led_now>=power_start&&led_now<=power_end)
-				{
-				lcdak = 1;
-				//cs_573 = 1;Delay_50us(1);cs_573=0;
-				}
-			else
-				{
-				lcdak = 0;
-				//cs_573 = 1;Delay_50us(1);cs_573=0;
-				}
-				
-		}
+//		if(power_start>power_end){
+//	   		if(led_now>=power_start||led_now<=power_end)
+//				{
+//				lcdak = 1;
+//				//cs_573 = 1;Delay_50us(1);cs_573=0;
+//				}
+//			else
+//				{
+//				lcdak = 0;
+//				//cs_573 = 1;Delay_50us(1);cs_573=0;
+//				}
+//				}
+//		else if(power_start==power_end)
+//			{
+//			lcdak = 0;
+//			//cs_573 = 1;Delay_50us(1);cs_573=0;
+//			}
+//		else
+//		{
+//			  if(led_now>=power_start&&led_now<=power_end)
+//				{
+//				lcdak = 1;
+//				//cs_573 = 1;Delay_50us(1);cs_573=0;
+//				}
+//			else
+//				{
+//				lcdak = 0;
+//				//cs_573 = 1;Delay_50us(1);cs_573=0;
+//				}
+//				
+//		}
 		/////////////////////////
 			i=DS1302Read(DS1302_MINUTE_READ);
 	if(i!=TIME[4])

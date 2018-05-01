@@ -40,6 +40,7 @@ unsigned int POST_num = 30;
 uchar code POST2[]="\r\n\r\n{\"title\":\"mydevice\",\"desc\":\"";
 //string POST_name = conghun2;
 uchar code POST3[]="\"}\r\n";
+uchar code POST4[]="\r\n\r\n{\"title\":\"mysmsrec\",\"desc\":\"";
 //获取远程控制参数
 uchar code Remote[]="GET /devices/23879956/datapoints HTTP/1.1\r\nHost:api.heclouds.com\r\nAccept:*/*\r\napi-key:vuYc9rA4K9cepRHWzy22FO7SncI=\r\nContent-Length:0\r\nConnection:close\r\n\r\n\r\n";
 
@@ -487,7 +488,7 @@ void message(uchar *tele,uchar chan)
 	com2_cmd_buf[1]=' ';
 	
 	//要注意POST_num的值，曾经有个bug就是每次开机只能上传一次数据，因为写成了POST_num=POST_num+...
-	POST_num = 30 + 11 + 9 + 1 + 2;	//第一加加的是手机号，第二加加的是机器编号，第三加加的是货道编号,最后加的是两个逗号吧	
+	POST_num = 30 + 12 + 9 + 1 + 2;	//第一加加的是手机号，第二加加的是机器编号，第三加加的是货道编号,最后加的是两个逗号吧	
 
 	//连接Yeelink
 	
@@ -511,8 +512,8 @@ void message(uchar *tele,uchar chan)
 	com2_cmd_buf[1]=' ';
 	Print_Str(POST);//第一串字符常量
 	Print_Char(0x35);//Content-length
-	Print_Char(0x33);
-	Print_Str(POST2);  //第二串字符常量
+	Print_Char(0x34);
+	Print_Str(POST4);  //第二串字符常量
 	for(i=0;i<11;i++)	//发送11位手机号
 	{
 	Print_Char(0x30+tele[i]);

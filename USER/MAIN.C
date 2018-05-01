@@ -13,7 +13,7 @@
 #include "SMS.H"
 #include "SC8020B.H"
 #include "Mentor.h"
-#include "ds18b20.H"
+//#include "ds18b20.H"
 //硬件版本号         
 uint sum_id;
 //uint SET_DIS = 1;
@@ -483,7 +483,7 @@ void main( )
 	  uint del_1;
 	  uint born_year;
 	  uint age;
-	  uint tempr;
+//	  uint tempr;
 	  a = 0;
 	  aa=0;
 	  ad = 0;
@@ -563,13 +563,14 @@ void main( )
 	TR0 = 1;
 	Init_UART_SMS();init_gprs();
 	
-	//BEEP(200);
+	BEEP(200);
 	AUXR1 = 0X00;//串口在3.0,3.1
      while ( 1 )
      { 
 			
 		 if(update_logo == 1)
-		 {update_stratage();update_logo = 0;}
+		 {//update_stratage();
+		 update_logo = 0;}
 		  //{}
 		
 	
@@ -609,12 +610,12 @@ void main( )
 								  if(t_tmp!=TIME[5]){
 								 Draw_LOGO(Cl,Cl,Cl);
 									  //WriteCommand(0x01);  //清屏
-									  LCD_PutString(0,1,"当前温度：    度");
-									  
-									  WriteCommand(0x86);
-									  tempr= readtempr();
-									  WriteData('0'+tempr/100);
-									  WriteData('0'+tempr%100/10);
+//									  LCD_PutString(0,1,"当前温度：    度");
+//									  
+//									  WriteCommand(0x86);
+//									  tempr= readtempr();
+//									  WriteData('0'+tempr/100);
+//									  WriteData('0'+tempr%100/10);
 									  LCD_PutString(0,2,"本机已发放药具：");
 									  LCD_PutString(0,3,"          盒    ");
 									  WriteCommand(0x30);
@@ -654,7 +655,7 @@ void main( )
 
 		
 	 /*在用户时间限制或是无药品时显示一段时间的错误提示*/	
-	  	if(set_num == USER_STATE_ERR||set_num == NO_INV_STATE || set_num == USER_STATE){
+	  	if(set_num == USER_STATE_ERR||set_num == NO_INV_STATE){
 				if(tmp_show>8)
 					{
 						set_num = 0;
@@ -665,13 +666,24 @@ void main( )
 			//			aa = 225;
 					}
 			}
-	  
+	  	if(set_num == USER_STATE)
+		{
+				if(tmp_show>14)
+					{
+						set_num = 0;
+						tmp_show = 0;
+						user_channel = 0;
+						for(s=1;s<4;s++)		
+							LCD_PutString(0,s,"                ");
+			//			aa = 225;
+					}
+			}
 		/*显示一段时间的请取货界面，电机状态另行控制*/
 		if(set_num == GET_INV_STATE) //如果用户不取货
 		{
 					
 			
-				if((tmp_show>4) && (a>5)) //到请取货状态
+				if((tmp_show>16) && (a>5)) //到请取货状态
 				{
 					
 					
@@ -737,7 +749,29 @@ void main( )
 		if(pos2 == 0)
 		{
 			// 	DelayMs(30);  //一次延时的方式
-			set_num = POS_ON;		
+			set_num = POS_ON;
+			
+				if((tmp_show>12) && (a>5)) //到请取货状态
+				{
+					
+					
+					user_channel=0;
+					
+
+			set_num = TO_THANKS;
+			TR0 = 0;
+			MENTOR_OFF();
+			tmp_show = 0;
+			TH0 = 0Xc8;
+			TL0 = 0Xc0;
+			a=0;
+			TR0 = 1;
+			LCD_PutString(0,1,"                ");
+			LCD_PutString(0,2,"                ");
+			LCD_PutString(0,3,"                ");
+			DisplayLcd(GET_INV); 
+			sc_speech(5);
+				}		
 			}
 			else{
 			set_num = TO_THANKS;
@@ -928,21 +962,14 @@ void InitializeSystem()
 
 
 
-/* void BEEP(unsigned int i)
+ void BEEP(unsigned int i)
 {
     unsigned int k;
 	k=i*45;		
 	buzz = 0;
-	
-	
-//	led =  0;	
-
 	DelayMs(k);		
 	buzz =1; 	
-
-// 	led =  1;
-   
-} */
+} 
 
 void Write_E(uchar n,uint x,uchar dat)
 {
@@ -1018,7 +1045,7 @@ CHK_SUM  --------1字节
 		{
 			
 			
-//			BEEP(50);	
+			BEEP(50);	
 
 
 			ri=DS1302Read(0x87);
@@ -1682,12 +1709,13 @@ void T0_time() interrupt 1
 			}
 	
 
-if(aa == 15000){
+	if(aa == 15000){
 	aa = 0;
 	update_logo = 1;
 	}	
-if(aa%50 == 0)
+	if(aa%50 == 0)
 	ask_it = 1;
+
 	if(a == 40)
 	{	
 		a = 0;

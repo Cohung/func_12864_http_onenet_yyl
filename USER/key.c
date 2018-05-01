@@ -219,7 +219,7 @@ void set_table()
 						  switch(set_num)
 						  {
 						    case 1:  
-							//	BEEP(15);
+								BEEP(15);
 								for(i=1;i<4;i++) 	  
 							         LCD_PutString(0,i,"                ");
 						             LCD_PutString(0,1,"修改时间： " );
@@ -234,7 +234,7 @@ void set_table()
 									 break;
 									  
 							case 2:  
-						//	BEEP(15);
+							BEEP(15);
 									 for(i=1;i<4;i++) 	  
 							         LCD_PutString(0,i,"                ");//TR0 = 0; 
 							         LCD_PutString(0,1,"修改间隔时间:");
@@ -258,7 +258,7 @@ void set_table()
 									 store_timerange = Time_Range;	 
 									 break;
 							case 3:  
-					//		BEEP(15);
+							BEEP(15);
 							Write_E(57,0,Time_Range);
 									 for(i=1;i<4;i++){ 	  
 							         	LCD_PutString(0,i,"                ");
@@ -290,7 +290,7 @@ void set_table()
 								    
 									 break;
 							case 4:  
-						//	BEEP(15);
+							BEEP(15);
 							led_start = set_led_time[0]*60+set_led_time[1];
 							led_end = set_led_time[2]*60+set_led_time[3];
 							Write_E(57,1,set_led_time[0]);
@@ -314,7 +314,7 @@ void set_table()
 							break;
 
 							case 5:
-					//		BEEP(15);
+							BEEP(15);
 							for(i=0;i<11;i++){
 								Write_E(57,5+i,num[i]);
 								
@@ -345,7 +345,7 @@ void set_table()
 							        LCD_PutString(0,1,"                ");
 									LCD_PutString(0,3,"                ");
 									LCD_PutString(0,2,"    设置成功！  ");
-						//			BEEP(200);
+									BEEP(200);
 							        LCD_PutString(0,2,"                ");
 						
 									 break;
