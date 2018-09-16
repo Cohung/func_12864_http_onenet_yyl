@@ -94,6 +94,8 @@ void Print_Str(uchar *str)//串
 void init_gprs()
 {
 	uchar i;
+	uchar timeout;
+	timeout = 100;
 	//取消命令回显，多发几次
 	
 
@@ -102,21 +104,39 @@ void init_gprs()
 	for(i=0;i<6;i++)
 		Print_Char(ATE0[i]);	
 	delay(10);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
 	for(i=0;i<6;i++)
 		Print_Char(ATE0[i]);	
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
 	
 	for(i=0;i<6;i++)
 		Print_Char(ATE0[i]);	
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -124,7 +144,13 @@ void init_gprs()
 	
 	for(i=0;i<9;i++)
 		Print_Char(CCID[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -132,7 +158,13 @@ void init_gprs()
 	
 	for(i=0;i<10;i++)
 		Print_Char(CREG[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -140,7 +172,13 @@ void init_gprs()
 	
 	for(i=0;i<12;i++)
 		Print_Char(CGATT[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -148,7 +186,13 @@ void init_gprs()
 	
 	for(i=0;i<14;i++)
 		Print_Char(CGACT[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -171,6 +215,8 @@ void send_net(uchar *a,uchar age,uchar chan)
 	uchar i;
 	uchar name_num=0;
 	uchar tmp1,tmp2;
+	uchar timeout;
+	timeout = 100;
 
 		//TR1 = 0;
 	AUXR1 = 0X40;//串口在3.6,3.7
@@ -183,7 +229,13 @@ void send_net(uchar *a,uchar age,uchar chan)
 	for(i=0;i<6;i++)
 		Print_Char(ATE0[i]);	
 	delay(10);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -191,7 +243,13 @@ void send_net(uchar *a,uchar age,uchar chan)
 	
 	for(i=0;i<12;i++)
 		Print_Char(CGATT[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -199,7 +257,13 @@ void send_net(uchar *a,uchar age,uchar chan)
 	
 	for(i=0;i<14;i++)
 		Print_Char(CGACT[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -222,10 +286,22 @@ void send_net(uchar *a,uchar age,uchar chan)
 	com2_cmd_buf[1]=' ';
 	for(i=0;i<40;i++)
 		Print_Char(CIPSTART[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 //	com2_cmd_buf[0]=' ';
 //	com2_cmd_buf[1]=' ';
-	while(com2_cmd_buf[0]!='C');
+	while((com2_cmd_buf[0]!='C')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 	//发送数据指令
@@ -234,7 +310,13 @@ void send_net(uchar *a,uchar age,uchar chan)
 		Print_Char(CIPSEND[i]);
 	//while(wait_send);
 	//delay(60);//等待服务器返回>
-	while(com2_cmd_buf[0]!='>');
+	while((com2_cmd_buf[0]!='>')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 	Print_Str(POST);//第一串字符常量
@@ -438,7 +520,13 @@ void send_net(uchar *a,uchar age,uchar chan)
 
 	Print_Str(POST3);	//末尾字符常量
 	Print_Str(SEND);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -455,6 +543,8 @@ void message(uchar *tele,uchar chan)
 	
 	
 	uchar i;
+	uchar timeout;
+	timeout = 100;
 
 	AUXR1 = 0X40;//串口在3.6,3.7
 	com2_cmd_num = 0;
@@ -467,7 +557,13 @@ void message(uchar *tele,uchar chan)
 	for(i=0;i<6;i++)
 		Print_Char(ATE0[i]);	
 	delay(10);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -475,7 +571,13 @@ void message(uchar *tele,uchar chan)
 	
 	for(i=0;i<12;i++)
 		Print_Char(CGATT[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
@@ -483,7 +585,13 @@ void message(uchar *tele,uchar chan)
 	
 	for(i=0;i<14;i++)
 		Print_Char(CGACT[i]);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 	
@@ -507,7 +615,13 @@ void message(uchar *tele,uchar chan)
 		Print_Char(CIPSEND[i]);
 	//while(wait_send);
 	//delay(50);//等待服务器返回>
-	while(com2_cmd_buf[0]!='>');
+	while((com2_cmd_buf[0]!='>')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 	Print_Str(POST);//第一串字符常量
@@ -532,7 +646,13 @@ void message(uchar *tele,uchar chan)
 
 	Print_Str(POST3);	//末尾字符常量
 	Print_Str(SEND);
-	while(com2_cmd_buf[0]!='O');
+	while((com2_cmd_buf[0]!='O')&&(timeout > 0))
+	{
+	delay(1);
+	if(timeout>0)
+       timeout--;
+	}
+	timeout = 100;
 	com2_cmd_buf[0]=' ';
 	com2_cmd_buf[1]=' ';
 
